@@ -9,4 +9,4 @@ Team Members:
 - Myriam Bengoechea
 
 
-* * Please see docs folder for Assignments
+Please see docs folder for Assignments

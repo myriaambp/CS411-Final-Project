@@ -1,6 +1,6 @@
 # Project Proposal 1:
 
-
+Our first idea centers around the ability for the user to understand what people are saying recently regarding TV shows and Movies. The user would be able to input the title of the TV show or movie to get a score based on Twitter and IMDB reviews. Using the hashtag tool on Twitter we would pull tweets that are written about these shows and movies and run them through the Stanford Sentiment Treebank, which analyzes the sentiment of the text to return a score ranging from 1-20. We would do the same procedure with the IMDB reviews and average the two scores given from the sentiment analysis to return a consolidated score for the user.
 
 
 

@@ -7,3 +7,6 @@ Team Members:
 - Bing Zeng
 - Bradley Shulman
 - Myriam Bengoechea
+
+
+* Please see docs folder for Assignments

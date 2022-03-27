@@ -1,4 +1,4 @@
-##Trending Shows
+## Trending Shows
 
 Idea: As a user, I want to be able to see what people are talking about the most so I can see what is popular right now for me to watch.
 

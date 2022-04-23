@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import './styles.css';
 
 function SearchTitle() {
   const [name, setName] = useState("");
@@ -16,9 +17,12 @@ function SearchTitle() {
   }
 
   return (
+
 	  <div>
-    <form onSubmit={handleSubmit}>
-      <label>Search for a movie:
+      <h1 className="title_01"> Movie Sentiment Analyzer </h1>
+      <h4 id='header'></h4>
+    <form className ="search_statement" onSubmit={handleSubmit}>
+      <label>Search for a movie: &nbsp;
         <input 
           type="text" 
           value={name}
@@ -29,7 +33,10 @@ function SearchTitle() {
     </form>
 	  <ul><div dangerouslySetInnerHTML={{__html: titles.join("")}} /></ul>
 	  </div>
+
   )
 }
+
+
 
 export default SearchTitle;

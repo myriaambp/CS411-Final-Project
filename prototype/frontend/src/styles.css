@@ -1,0 +1,22 @@
+body {
+    text-align: center;
+    background-color: #f0e8c5;
+  }
+
+.title_01 {
+    position:relative;
+    top:200px;
+    background-color:darkcyan;
+}
+
+.search_statement {
+  position:relative;
+  top:200px;
+  background-color:dimgrey;
+}
+
+.button {
+  position:relative;
+  top:200px;
+  background-color:dimgrey;
+}

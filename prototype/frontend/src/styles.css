@@ -12,11 +12,4 @@ body {
 .search_statement {
   position:relative;
   top:200px;
-  background-color:dimgrey;
-}
-
-.button {
-  position:relative;
-  top:200px;
-  background-color:dimgrey;
 }

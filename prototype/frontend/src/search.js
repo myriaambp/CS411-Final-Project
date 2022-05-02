@@ -1,10 +1,17 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import { GoogleLogin } from 'react-google-login';
+import { GoogleLogout } from 'react-google-login';
 import './styles.css';
 
 function SearchTitle() {
   const [name, setName] = useState("");
   const [titles, setTitles] = useState([]);
+  const [loginStatus, setLoginStatus] = useState({
+	  isAuthenticated: false,
+	  user: null,
+	  token: ''
+  });
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,8 +23,30 @@ function SearchTitle() {
 	  });
   }
 
-  return (
+  const loginSuccess = (response) => {
+	  console.log(response);
+	  setLoginStatus({
+		  isAuthenticated: true,
+		  user: response.googleId,
+		  token: response.accessToken
+	  });
+  }
 
+  const loginFailure = (error) => {
+	  console.log(error);
+	  alert(error['error']);
+  }
+
+  const logoutSuccess = (response) => {
+	  console.log(response);
+	  setLoginStatus({
+		  isAuthenticated: false,
+		  user: null,
+		  token: ''
+	  });
+  }
+
+  return loginStatus['isAuthenticated'] ? (
 	  <div>
       <h1 className="title_01"> Movie Sentiment Analyzer </h1>
       <h4 id='header'></h4>
@@ -32,9 +61,26 @@ function SearchTitle() {
       <input type="submit" />
     </form>
 	  <ul><div dangerouslySetInnerHTML={{__html: titles.join("")}} /></ul>
+			<GoogleLogout
+      clientId="303901244551-3c5bs2cp41i0odqvccur94so8vh9rces.apps.googleusercontent.com"
+      buttonText="Logout"
+      onLogoutSuccess={logoutSuccess}
+    >
+    </GoogleLogout>
 	  </div>
 
-  )
+  ) :
+	(
+		<div>
+	<GoogleLogin
+    clientId="303901244551-3c5bs2cp41i0odqvccur94so8vh9rces.apps.googleusercontent.com"
+    buttonText="Login"
+    onSuccess={loginSuccess}
+    onFailure={loginFailure}
+    cookiePolicy={'single_host_origin'}
+  />
+		</div>
+	);
 }
 
 

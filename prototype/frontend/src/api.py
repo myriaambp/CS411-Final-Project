@@ -5,17 +5,17 @@ import requests
 import json
 import pandas as pd
 import flask 
-from django.shortcuts import render
-import json
-from suds.client import Client as Client
-from django.http.response import HttpResponse
-from flask import Flask, jsonify, render_template, request
-import cgi
-import cgitb
-cgitb.enable()
-app = Flask(__name__)
+from flask_classful import FlaskView, route
+from flask import Flask, jsonify, request
 
-cgitb.enable()
+@app.route('/api')
+class API(FlaskView):
+    route_base = '/api'
+    def post(self):
+        if (request.headers['Content-Type'] == 'application/json'):
+            word = request.get_json()
+            print(word)
+
 
 class MakeApiCall:
 
@@ -48,33 +48,20 @@ class MakeApiCall:
         # self.get_user_data(api, parameters)
 
 
-# print("BEGIN API CALL")
-# api_call = MakeApiCall("https://imdb-api.com/en/API/SearchMovie/k_wz4q71x5/endgame")
-# print("END API CALL")
+print("BEGIN API CALL")
+api_call = MakeApiCall("https://imdb-api.com/en/API/SearchMovie/k_wz4q71x5/endgame")
+print("END API CALL")
 
 def display_results():
     if(requests.is_ajax()):
         msg = request.POST.get("message")
         if(msg == "display-results"):
             api_call = MakeApiCall("https://imdb-api.com/en/API/SearchMovie/k_wz4q71x5/endgame")
-            return HttpResponse(json.dumps(api_Call), mimetype='application/json')
+            return HttpResponse(json.dumps(api_Call), mimetype = 'application/json')
 
-
-def main():
-    form = cgi.FieldStorage()
-    msg = form["message"]
-    mov = form["movie"]
-    if (msg == "display-result"):
-        return "<h1> Hello World </h1>"
-    else:
-        return "<h1> Wow </h1>"
-
-
-main()
 
 
 # display_results()
-# @app.route('/api')
 # def add_numbers():
 #     a = request.args.get('a', 0, type=int)
 #     b = request.args.get('b', 0, type=int)

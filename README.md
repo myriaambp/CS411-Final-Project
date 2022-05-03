@@ -27,7 +27,7 @@ The application utilizes Google sign-in in order to track the search history of 
 
 There are numerous features that can be added to improve the overall experience of the user on Moviester. 
 
-- As we planned at the beginning, we'd like to add a time horizon feature to allow the user to specify a specifically time period from which to receive the sentiment score. This would give the application many more use cases.
+- As we planned at the beginning, we'd like to add a time horizon feature to allow the user to specify a specific time period from which to receive the sentiment score. This would give the application many more use cases.
 - We'd like to improve the overall UI, make it a bit more readable, as some aspects are clunky
 - Add some potential social aspects, such as a tweet generator
 - We will continue to hypothesize as we build to add more features, however small, that will tangibly benefit the user.

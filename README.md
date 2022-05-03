@@ -24,6 +24,7 @@ On the back end, we used the Django framework with Python as the coding language
 The application utilizes Google sign-in in order to track the search history of users. The user is prompted to sign in upon the opening of Moviester. Once the user signs in, they are automatically redirected to the "movie search" page. 
 
 **What's Left**
+
 There are numerous features that can be added to improve the overall experience of the user on Moviester. 
 
 - As we planned at the beginning, we'd like to add a time horizon feature to allow the user to specify a specifically time period from which to receive the sentiment score. This would give the application many more use cases.

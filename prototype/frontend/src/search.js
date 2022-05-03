@@ -15,7 +15,9 @@ function SearchTitle() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-	  fetch("http://localhost:5000/search_title/" + name)
+	  fetch("http://localhost:5000/search_title/" + name,{
+		  headers: { 'Authorization': 'Basic ' + btoa(loginStatus['user'] + ":" + loginStatus['token']) }
+	  })
 	  .then(response => response.json())
 	  .then(json => {
 		  const r = json.results;
@@ -25,6 +27,12 @@ function SearchTitle() {
 
   const loginSuccess = (response) => {
 	  console.log(response);
+	  fetch("http://localhost:5000/login/", {
+		  method: 'POST',
+		  headers: { 'Content-Type': 'application/json' },
+		  body: JSON.stringify(response)
+	  })
+	  .then(test => console.log(test));
 	  setLoginStatus({
 		  isAuthenticated: true,
 		  user: response.googleId,

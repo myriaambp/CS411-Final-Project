@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './search_movie.css'; // Tell webpack that Button.js uses these styles
-import { Route, Switch } from "react-router";
+// import { Route, Switch } from "react-router";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
 
@@ -23,13 +24,17 @@ root.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
+  // <SearchTitle />
   // <Main />
-    <Switch>
-        <Route path='/' exact component={SearchTitle} />
-        <Route path='/AboutUs' component={AboutUs} />
+  <Router>
+     <Routes>
+        <Route path='/' element={<SearchTitle />} />
+        <Route path='/AboutUs' element={<AboutUs />} />
         {/* <Route path='/sheeps' component={Sheeps} /> */}
         {/* <Route path='/goats' component={Goats} /> */}
-    </Switch>
+    </Routes>
+  </Router>
+   
 );
 
 // If you want to start measuring performance in your app, pass a function

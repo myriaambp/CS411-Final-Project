@@ -11,7 +11,7 @@ function GoogleAuth() {
         <div className="Container">
           <div className = "topbar">
               <h1 className = "mainLogo"> Moviester </h1>
-              <button className = "main"> Main <FaHeart /> </button>
+              <button className = "main"> Main  </button>
               <button className = "main"> About Us <FaGithub /> </button>
           </div>
             <div>

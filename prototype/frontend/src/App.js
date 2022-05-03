@@ -1,6 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import './search.js';
+import React, { Component }  from 'react';
+
+
 
 function App() {
   return (

@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import SearchTitle from './search';
 import reportWebVitals from './reportWebVitals';
+import GoogleAuth from './Twitter_Authentication';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<SearchTitle />
+	// <SearchTitle/>
+	<GoogleAuth/>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

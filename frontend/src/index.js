@@ -13,7 +13,11 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // ------------ ELEMENTS -----------------
 import SearchTitle from './search_movie';
 import AboutUs from './aboutus'
+import GoogleAuth from './Twitter_Auth';
+
 // -----------------------------------
+
+const cors = require("cors");
 
 
 
@@ -25,12 +29,11 @@ root.render(
   //   <App />
   // </React.StrictMode>
   // <SearchTitle />
-  // <Main />
   <Router>
      <Routes>
         <Route path='/' element={<SearchTitle />} />
         <Route path='/AboutUs' element={<AboutUs />} />
-        {/* <Route path='/sheeps' component={Sheeps} /> */}
+        <Route path='/Auth' component={<GoogleAuth />} />
         {/* <Route path='/goats' component={Goats} /> */}
     </Routes>
   </Router>

@@ -6,16 +6,52 @@ import './search_movie.css'; // Tell webpack that Button.js uses these styles
 import { FaHeart } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa"
+import { useRef } from "react";
 
+const calc_sentinment = (tid) => {
+    console.log(" WHY NOT TEST HERE AGAIN");
+    fetch("http://localhost:5000/pythonapi/" + tid, {mode: 'no-cors' })
+    .then(response => response.json())
+    .then(json => {
+        const r = json.results;
+        // setTitles(r.map(result => `<li key=` + result.id + `>` + result.title + ` ` + result.description + `</li>`));
+    });
+}
 
 function SearchTitle() {
     const [name, setName] = useState("");
     const [titles, setTitles] = useState([]);
     var jsonresults = ""
 
+
     const handleSubmit = (event) => {
+        // const express = require('express');
+ 
+        // const app = express();
+        
+        // app.get('/', function(req, res) {
+        // res.send();
+        // });
+        
+        // app.listen(4200);
+        // app.get('/', function(req, res) {
+        //     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
+        //     res.send([
+        //       {
+        //         id: 0,
+        //         title: 'Lorem ipsum',
+        //         content: 'Dolor sit amet',
+        //         author: 'Marcin'
+        //       },
+        //       {
+        //         id: 1,
+        //         title: 'Vestibulum cursus',
+        //         content: 'Dante ut sapien mattis',
+        //         author: 'Marcin'
+        //       }
+        //     ]);
+        //   });
         var movie = document.getElementById("movie_input").value;
-        var resultHTML = document.getElementById("results");
         var movies_container = document.getElementById("movies_container");
         if(movie.length < 3) {
             alert("Please Fill In more than 2 characters")
@@ -44,12 +80,14 @@ function SearchTitle() {
                                         + '<img src="' + movie.image + '" alt="my movie poster" style = "width: 260px !important; height: 400px !important; "/>'
                                     + '</div>'
                                     + '<div className = "description">'
-                                        // + movie.description +
+                                        + '<button className = "calcSent" onClick={' + calc_sentinment(movie.id) + '}> CALCULATE SENTIMENT </button>'
+                                        // + calc_sentiment(movie.id) +
                                     + '</div>'
                                 + '</div>'
                         count += 1
                         // console.log(i)
                     }
+                    
                 },
                 (error) => {
                     console.log(error)

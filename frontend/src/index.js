@@ -1,13 +1,15 @@
-import React from 'react';
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './search_movie.css'; // Tell webpack that Button.js uses these styles
-// import { Route, Switch } from "react-router";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-
 
 
 // ------------ ELEMENTS -----------------
@@ -23,20 +25,30 @@ const cors = require("cors");
 
 
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
   //   <App />
   // </React.StrictMode>
   // <SearchTitle />
-  <Router>
-     <Routes>
-        <Route path='/' element={<SearchTitle />} />
-        <Route path='/AboutUs' element={<AboutUs />} />
-        <Route path='/Auth' component={<GoogleAuth />} />
+  <div className = "stypid">
+      <Router>
+        <div>
+        <Switch>
+          <Route exact path='/'> <SearchTitle /></Route> 
+          <Route path='/aboutus'> <AboutUs /></Route>
+          <Route path='/auth'>  <GoogleAuth/></Route>
+          {/* <Route path='/goats' component={Goats} /> */}
+        </Switch>
+      </div>
+    </Router>
+        {/* <Route exact path='/' element = {<SearchTitle />}> </Route> */}
+        {/* <Route path='/AboutUs' element = { <AboutUs />}> </Route> */}
+        {/* <Route path='/Auth' element = { <GoogleAuth />}> </Route> */}
         {/* <Route path='/goats' component={Goats} /> */}
-    </Routes>
-  </Router>
+   </div>
+
    
 );
 

@@ -6,16 +6,17 @@ import './search_movie.css'; // Tell webpack that Button.js uses these styles
 import { FaHeart } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa"
-
+import {Link} from 'react-router-dom';
 function AboutUs() {
     
 
     return (
         <div className = "container">
+
             <div className = "topbar">
                 <h1 className = "mainLogo"> Moviester </h1>
-                <button className = "main-btn"> Main <FaHome /> </button>
-                <button className = "main-btn"> About Us <FaGithub /> </button>
+                <button id = "nav-btn-main" className = "main-btn"> <Link to={'/'}> Search <FaHome /> </Link></button>
+                <button id = "nav-btn-aboutus" className = "main-btn"> <Link to={'/auth'}> Main <FaHome /> </Link></button>
             </div>
             <br/>
             <br/> 

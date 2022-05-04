@@ -1,56 +1,30 @@
 // https://ultimatedjango.com/blog/how-to-consume-rest-apis-with-django-python-reques/
-import ReactDOM from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
-import Movie from './movie';
 import './search_movie.css'; // Tell webpack that Button.js uses these styles
-import { FaHeart } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa"
-import { useRef } from "react";
+import {useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 
-const calc_sentinment = (tid) => {
-    console.log(" WHY NOT TEST HERE AGAIN");
-    fetch("http://localhost:5000/pythonapi/" + tid, {mode: 'no-cors' })
-    .then(response => response.json())
-    .then(json => {
-        const r = json.results;
-        // setTitles(r.map(result => `<li key=` + result.id + `>` + result.title + ` ` + result.description + `</li>`));
-    });
-}
+
 
 function SearchTitle() {
     const [name, setName] = useState("");
     const [titles, setTitles] = useState([]);
     var jsonresults = ""
 
+    const calc_sentinment = (tid) => {
+        fetch("http://localhost:5000/pythonapi/" + tid, {mode: 'no-cors' })
+        .then(response => response.json())
+        .then(json => {
+            const r = json.results;
+            // setTitles(r.map(result => `<li key=` + result.id + `>` + result.title + ` ` + result.description + `</li>`));
+        }).then (res => {
+            console.log(res)
+        })
+    }
 
     const handleSubmit = (event) => {
-        // const express = require('express');
- 
-        // const app = express();
-        
-        // app.get('/', function(req, res) {
-        // res.send();
-        // });
-        
-        // app.listen(4200);
-        // app.get('/', function(req, res) {
-        //     res.setHeader('Access-Control-Allow-Origin', 'http://localhost:4200');
-        //     res.send([
-        //       {
-        //         id: 0,
-        //         title: 'Lorem ipsum',
-        //         content: 'Dolor sit amet',
-        //         author: 'Marcin'
-        //       },
-        //       {
-        //         id: 1,
-        //         title: 'Vestibulum cursus',
-        //         content: 'Dante ut sapien mattis',
-        //         author: 'Marcin'
-        //       }
-        //     ]);
-        //   });
         var movie = document.getElementById("movie_input").value;
         var movies_container = document.getElementById("movies_container");
         if(movie.length < 3) {
@@ -101,8 +75,8 @@ function SearchTitle() {
     <div className = "container">
         <div className = "topbar">
             <h1 className = "mainLogo"> Moviester </h1>
-            <button className = "main-btn"> Main <FaHome /> </button>
-            <button className = "main-btn"> About Us <FaGithub /> </button>
+            <button id = "nav-btn-main" className = "main-btn"> <Link to={'/Auth'}> Main <FaHome /> </Link></button>
+            <button id = "nav-btn-aboutus" className = "main-btn"> <Link to={'/aboutus'}> About Us <FaGithub /> </Link></button>
 
         </div>
         <br/>

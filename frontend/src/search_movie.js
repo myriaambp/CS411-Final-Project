@@ -5,70 +5,46 @@ import { FaHome } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa"
 import {useHistory} from "react-router-dom";
 import {Link} from "react-router-dom";
-
-
+import Movie from './movie';
+import ReactDOM from 'react-dom';
 
 function SearchTitle() {
     const [name, setName] = useState("");
     const [titles, setTitles] = useState([]);
     var jsonresults = ""
 
-    const calc_sentinment = (tid) => {
-        fetch("http://localhost:5000/pythonapi/" + tid, {mode: 'no-cors' })
-        .then(response => response.json())
-        .then(json => {
-            const r = json.results;
-            // setTitles(r.map(result => `<li key=` + result.id + `>` + result.title + ` ` + result.description + `</li>`));
-        }).then (res => {
-            console.log(res)
-        })
+    const calcSentiment = (event) => { 
+        console.log("HELLO WORLD")
     }
 
     const handleSubmit = (event) => {
-        var movie = document.getElementById("movie_input").value;
+        var moviename = document.getElementById("movie_input").value;
         var movies_container = document.getElementById("movies_container");
-        if(movie.length < 3) {
+        if(moviename.length < 3) {
             alert("Please Fill In more than 2 characters")
         } else {
-            fetch("https://imdb-api.com/en/API/SearchMovie/k_wz4q71x5/"+movie)
+            fetch("https://imdb-api.com/en/API/SearchMovie/k_wz4q71x5/"+moviename)
             .then(res => res.json())
             .then(
                 (result) => {
                     // resultHTML.value = result
                     // console.log(result)
+                    var movie_elements = []
                     jsonresults = JSON.parse(JSON.stringify(result))
                     var movie_results = jsonresults.results
-                    console.log(movie_results)
-                    var count = 0
-                    for (let i in movie_results){
-                        movie = movie_results[0]
+                    for(var i = 0; i < movie_results.length; i++) {
+                        let movie = movie_results[i];
                         console.log(movie)
-                        // movies_container.append(<Movie id={count} description={i[0]} ID={i[1]} Image={i[2]} Title={i[4]} />);
-                        movies_container.innerHTML = 
-                                '<div className="movie" style="display: block; width: 40% !important;">'
-                                    + '<div className="title-year">'
-                                        + '<h2 className="title" style="margin:3px">' + movie.title + '</h2>'
-                                        + '<h5 className="year" style="margin:5px">' + movie.description + '</h5>'    
-                                    + '</div>'
-                                    + '<div className="poster">'
-                                        + '<img src="' + movie.image + '" alt="my movie poster" style = "width: 260px !important; height: 400px !important; "/>'
-                                    + '</div>'
-                                    + '<div className = "description">'
-                                        + '<button className = "calcSent" onClick={' + calc_sentinment(movie.id) + '}> CALCULATE SENTIMENT </button>'
-                                        // + calc_sentiment(movie.id) +
-                                    + '</div>'
-                                + '</div>'
-                        count += 1
-                        // console.log(i)
-                    }
-                    
+                        movie_elements.push(<Movie d={movie.description} id={movie.id} i={movie.image} t={movie.title} />);
+                    }   
+                    ReactDOM.render(movie_elements, movies_container);
+                    console.log(movie_elements);
                 },
                 (error) => {
                     console.log(error)
                 }
             )
         }
-        
     }
 
     return (

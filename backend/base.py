@@ -1,5 +1,7 @@
 from flask import Flask
 import requests
+import pandas as pd
+import numpy as np
 import os
 from dotenv import load_dotenv
 api = Flask(__name__)
@@ -20,25 +22,27 @@ def my_profile():
 @api.route("/pythonapi/<tid>")
 def opinionson(tid):
     url = 'https://imdb-api.com/en/API/Reviews/k_wz4q71x5/' + tid;
-    load_dotenv()
-    imdb_apikey = os.environ.get('imdb_apikey')
-    ibm_apiurl = os.environ.get('ibm_apiurl')
-    ibm_apikey = os.environ.get('ibm_apikey')
     imdb_resp = requests.get(url).json()
-    movie_title = imdb_resp['title'] #for twitter searching; implement later
-    movie_fulltitle = imdb_resp['fullTitle'] #with year
-    imdb_reviews = [rev['title'] + rev['content'] for rev in imdb_resp['items']]
-    # print(ibm_apiurl)
-    ibm_imdb_responses = []
+    title = imdb_resp["title"]
+    mid = imdb_resp["imDbId"]
+    year = imdb_resp["year"]
+    reviews = imdb_resp["items"]
+    movies = pd.read_csv("../datasets/movies.csv")
+    rev_ds = pd.read_csv("../datasets/reviews.csv")
+    movies.columns = ["title", "id", "year", "avg_rate"]
+    rev_ds.columns = ["movie_id", "rate", "title", "review", "date", "spoilers"]
+    if (mid not in movies.title):
+        for r in reviews:
+            rev_ds.insert(mid, r["rate"], r["title"], r["content"], r["date"], r["warningSpoilers"])
+        thismov_rev_ds = rev_ds[["movie_id" == mid]]
+        rate_avg = thismov_rev_ds["rate"].mean()
+        movies = movies.insert ([title, mid, year, rate_avg])
+    else:
+        thismov_rev_ds = reviews[["movie_id" == mid]]
+        rate_avg = thismov_rev_ds["rate"].mean()
+    return rate_avg
 
-    for r in imdb_reviews:
-        ibm_imdb_responses += [requests.post(str(ibm_apiurl) + '/v1/analyze?version=2022-05-03', json={'text': r, 'features': {'emotion': {}, 'sentiment': {}}}, auth=('apikey',ibm_apikey)).json()]
 
-    pos_ratio = sum(label == 'positive' for label in [r['sentiment']['document']['label'] for r in ibm_imdb_responses]) / len(ibm_imdb_responses)
-    pos_avg_score = sum(r['sentiment']['document']['score'] for r in ibm_imdb_responses if r['sentiment']['document']['label'] == 'positive') / (pos_ratio * len(ibm_imdb_responses))
-    vals = {
-            'pos_ratio' : pos_ratio,
-            'pos_avg_score' : pos_avg_score
-            }
+        
 
-    return vals
+

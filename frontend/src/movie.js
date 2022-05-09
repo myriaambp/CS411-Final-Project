@@ -1,22 +1,44 @@
-import React from 'react';
+import './movie.scc';
+import React  from 'react';
+import {Component} from 'react';
 
-class Movie extends React.Component {
-   render() {
-       const {description, ID, Image, Title} = this.props;
-       return (
-           <div className="movie">
-               <div className="title-year">
-                   <h1 className="title">{Title}</h1>
-                   <h2 className="year">{ID}</h2>
-               </div>
-               <div className="poster">
-                   <img src={Image} alt="my movie poster"/>
-               </div>
-               <div className = "description">
-                   {description}
-               </div>
-           </div>
-       )
-   }
-}
-export default Movie;
+
+class Movie extends Component {
+    // constructor {d, id, i, t} = this.props;
+    constructor(props) {
+        super(props);
+    }
+
+    
+    
+    render() {
+        let { d, id, i, t } = this.props;
+        // curid
+        const calcSentiment = (event) => {
+            fetch("http://localhost:5000/pythonapi/" + {id})
+            .then(response => response.json())
+            .then(json => {
+                const r = json.results;
+            }).then (res => {
+                console.log(res)
+            })
+        }
+
+        console.log(d);
+        return (
+            <div className="movie">
+                <div className="title-year">
+                    <h2 className="title"> {t} </h2> 
+                    <h5 className="year"> {d} </h5>
+                </div>
+                <div className="poster">
+                    <img src={i}  className="image" />
+                </div>
+                <div className = "description">
+                    <button className = "calcSent" onClick={calcSentiment}> CALCULATE SENTIMENT </button>
+                    {/* // + calc_sentiment(movie.id) + */}
+                </div>
+            </div>
+        )
+    }
+} export default Movie;

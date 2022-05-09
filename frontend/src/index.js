@@ -38,7 +38,7 @@ root.render(
         <Switch>
           <Route exact path='/'> <SearchTitle /></Route> 
           <Route path='/aboutus'> <AboutUs /></Route>
-          <Route path='/auth'>  <GoogleAuth/></Route>
+          <Route path='/auth'>  <GoogleAuth /></Route>
           {/* <Route path='/goats' component={Goats} /> */}
         </Switch>
       </div>

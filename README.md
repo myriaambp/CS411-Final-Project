@@ -22,7 +22,7 @@ Install prereqs:
 ```
 pip3 install -r backend/requirements.txt
 cd frontend
-npm install
+npm install --use-legacy-peer-deps
 ```
 
 Create a `.env` file in the `backend` folder with the following information (IMDB and IBM Watson Natural Language keys are available for free from their respective sites with signup):

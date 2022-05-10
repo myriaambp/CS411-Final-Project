@@ -13,21 +13,39 @@ Please see docs folder for Assignments
 
 **Project Overview**
 
-From a high-level view, this repository contains the documentation for a project based around analyzing sentiment of movies from two sources: Twitter and IMDB. It is still a work in progress, as many features could be added to enhance the user experience.
+From a high-level view, this repository contains the documentation for a project based around analyzing sentiment of movies from two sources: Twitter and IMDB. It is still a work in progress, as many features could be added to enhance the user experience. More details on the project's creation, features, and relevant information are present below.
 
-**Web Flow Design**
+**SETUP**
 
-On the back end, we used the Django framework with Python as the coding language. On the front end, we used the React framework with Javascript as the coding language. Additionally, Django allowed us to pull the data from the RESTful APIs.
+Install prereqs:
 
-**Features**
+```
+pip3 install -r backend/requirements.txt
+cd frontend
+npm install --use-legacy-peer-deps
+```
 
-The application utilizes Google sign-in in order to track the search history of users. The user is prompted to sign in upon the opening of Moviester. Once the user signs in, they are automatically redirected to the "movie search" page. 
+Create a `.env` file in the `backend` folder with the following information (IMDB and IBM Watson Natural Language keys are available for free from their respective sites with signup):
 
-**What's Left**
+```
+imdb_apikey = 'YOURKEYHERE'
+ibm_apiurl = 'YOURURLHERE'
+ibm_apikey = 'YOURKEYHERE'
+```
 
-There are numerous features that can be added to improve the overall experience of the user on Moviester. 
+Run:
 
-- As we planned at the beginning, we'd like to add a time horizon feature to allow the user to specify a specific time period from which to receive the sentiment score. This would give the application many more use cases.
-- We'd like to improve the overall UI, make it a bit more readable, as some aspects are clunky
-- Add some potential social aspects, such as a tweet generator
-- We will continue to hypothesize as we build to add more features, however small, that will tangibly benefit the user.
+```
+cd backend
+flask run
+cd ../frontend
+npm start
+```
+
+A note: the Google login is currently configured to only work with BU emails (i.e. app is only allowing authorisation from within the organisation)
+
+ONCE THE PROJECT IS COMPLETE WE SHOULD
+* OUTLINE FEATURES
+* STEPS TAKEN TO CREATION
+* APIS/DATABASES USED
+* ANY OTHER PERTINENT INFORMATION TO EXPLAINING THE PROJECT

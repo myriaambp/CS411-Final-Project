@@ -1,0 +1,50 @@
+body {
+    text-align: center;
+    /* background-color: #f0e8c5; */
+    font-family: "Gill Sans";
+  }
+
+.title_01 {
+    position:relative;
+    /* top:200px; */
+    color: rgb(68, 97, 114);
+}
+
+.search_statement {
+  position:relative;
+  top:200px;
+}
+
+.google_button {
+  position:relative;
+  left:540px;
+}
+
+.topbar {
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  background: rgb(125, 125, 206);
+}
+
+.mainLogo {
+  flex: 7;
+  text-align: left;
+  padding-left: 25px;
+}
+
+.main {
+  flex: 1;
+  padding: 5px;
+  margin: 3px;
+  border-radius: 5px;
+  border: 3px solid black;
+  background-color: rgba(200, 200, 200, 0.8);
+  /* opacity: 0.3; */
+
+}
+
+.film {
+  border:3px;
+  top: 200px;
+}

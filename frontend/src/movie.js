@@ -11,18 +11,17 @@ class Movie extends Component {
     }
 
 	componentDidUpdate(prevProps) {
+		var sentimentStatement = document.getElementById("sentimentStatement");
 		if (this.props.id !== prevProps.id) {
-			return;
-		}
-		var description = document.getElementById("description");
-		if (this.state.sentiment.pos_ratio == -1) {
-			ReactDOM.render("Sorry, no review data was found.", description);
-		} else if (0 <= this.state.sentiment.pos_ratio <= 0.5) {
-			ReactDOM.render("Only " + (this.state.sentiment.pos_ratio * 100).toString() + "% of reviewers liked it, and average negative sentiment was " + this.state.sentiment.neg_avg_score.toString(), description);
-		} else if (0.5 < this.state.sentiment.pos_ratio <= 1) {
-			ReactDOM.render("It's looking good! " + (this.state.sentiment.pos_ratio * 100).toString() + "% of reviewers liked it, and average positive sentiment was " + this.state.sentiment.pos_avg_score.toString(), description);
+                    	ReactDOM.render("", sentimentStatement);
+		} else if (this.state.sentiment.pos_ratio == -1) {
+			ReactDOM.render("Sorry, no review data was found.", sentimentStatement);
+		} else if (this.state.sentiment.pos_ratio <= 0.5) {
+			ReactDOM.render("Only " + (this.state.sentiment.pos_ratio * 100).toFixed(0).toString() + "% of reviewers liked it, and average negative sentiment was " + this.state.sentiment.neg_avg_score.toString(), sentimentStatement);
+		} else if (this.state.sentiment.pos_ratio > 0.5) {
+			ReactDOM.render("It's looking good! " + (this.state.sentiment.pos_ratio * 100).toFixed(0).toString() + "% of reviewers liked it, and average positive sentiment was " + this.state.sentiment.pos_avg_score.toString(), sentimentStatement);
 		} else {
-			ReactDOM.render("Something went wrong.", description);
+			ReactDOM.render("Something went wrong.", sentimentStatement);
 		}
 	}
     
@@ -51,6 +50,7 @@ class Movie extends Component {
                 <div className = "description" id = "description">
                     <button className = "calcSent" onClick={calcSentiment}> CALCULATE SENTIMENT </button>
                     {/* // + calc_sentiment(movie.id) + */}
+		<div className = "sentimentStatement" id = "sentimentStatement"></div>
                 </div>
             </div>
         )

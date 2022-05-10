@@ -85,7 +85,7 @@ def opinionson(tid):
         vals = {
                 'pos_ratio' : -1,
                 'pos_avg_score' : -1,
-                'neg_avg_scre' : -1
+                'neg_avg_score' : -1
                 }
 
     return vals

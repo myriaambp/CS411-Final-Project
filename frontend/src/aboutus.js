@@ -6,9 +6,9 @@ import './search_movie.css'; // Tell webpack that Button.js uses these styles
 import { FaHeart } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa"
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 function AboutUs() {
-    
+
 
     return (
         <div className = "container">
@@ -25,4 +25,4 @@ function AboutUs() {
         </div>
     )
 
-} export default AboutUs
+} export default withRouter(AboutUs)

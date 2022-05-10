@@ -1,5 +1,5 @@
 // https://ultimatedjango.com/blog/how-to-consume-rest-apis-with-django-python-reques/
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import './search_movie.css'; // Tell webpack that Button.js uses these styles
 import { FaHome } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa"
@@ -7,15 +7,15 @@ import {useHistory} from "react-router-dom";
 import {Link} from "react-router-dom";
 import Movie from './movie';
 import ReactDOM from 'react-dom';
+import {AuthContext} from './index.js';
 
 function SearchTitle() {
     const [name, setName] = useState("");
     const [titles, setTitles] = useState([]);
-    var jsonresults = ""
 
-    const calcSentiment = (event) => { 
-        console.log("HELLO WORLD")
-    }
+	const userAuth = useContext(AuthContext);
+
+    var jsonresults = ""
 
     const handleSubmit = (event) => {
         var moviename = document.getElementById("movie_input").value;
@@ -23,12 +23,16 @@ function SearchTitle() {
         if(moviename.length < 3) {
             alert("Please Fill In more than 2 characters")
         } else {
-            fetch("https://imdb-api.com/en/API/SearchMovie/k_wz4q71x5/"+moviename)
+  	    fetch("http://localhost:5000/search_title/" + moviename,{
+		  headers: { 'Authorization': 'Basic ' + btoa(userAuth.loginStatus['user'] + ":" + userAuth.loginStatus['token']) }
+	    })
             .then(res => res.json())
             .then(
-                (result) => {
+                (json) => {
                     // resultHTML.value = result
-                    // console.log(result)
+		    console.log(json);
+		    const result = json.results;
+                    console.log(result);
                     var movie_elements = []
                     jsonresults = JSON.parse(JSON.stringify(result))
                     var movie_results = jsonresults.results
@@ -51,7 +55,7 @@ function SearchTitle() {
     <div className = "container">
         <div className = "topbar">
             <h1 className = "mainLogo"> Moviester </h1>
-            <button id = "nav-btn-main" className = "main-btn"> <Link to={'/Auth'}> Main <FaHome /> </Link></button>
+            <button id = "nav-btn-main" className = "main-btn"> <Link to={'/auth'}> Main <FaHome /> </Link></button>
             <button id = "nav-btn-aboutus" className = "main-btn"> <Link to={'/aboutus'}> About Us <FaGithub /> </Link></button>
 
         </div>

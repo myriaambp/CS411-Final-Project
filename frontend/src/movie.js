@@ -1,4 +1,4 @@
-import './movie.scc';
+import './movie.css';
 import React  from 'react';
 import {Component} from 'react';
 
@@ -15,7 +15,7 @@ class Movie extends Component {
         let { d, id, i, t } = this.props;
         // curid
         const calcSentiment = (event) => {
-            fetch("http://localhost:5000/pythonapi/" + {id})
+            fetch("http://localhost:5000/titleid_reviews/" + id)
             .then(response => response.json())
             .then(json => {
                 const r = json.results;

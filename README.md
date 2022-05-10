@@ -42,6 +42,8 @@ cd ../frontend
 npm start
 ```
 
+A note: the Google login is currently configured to only work with BU emails (i.e. app is only allowing authorisation from within the organisation)
+
 ONCE THE PROJECT IS COMPLETE WE SHOULD
 * OUTLINE FEATURES
 * STEPS TAKEN TO CREATION

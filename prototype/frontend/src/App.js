@@ -1,7 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
 import './search.js';
-import './api.py' 
 
 function App() {
   return (

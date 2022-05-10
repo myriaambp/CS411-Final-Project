@@ -7,15 +7,7 @@ import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<html>
-		<head>
-			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-		</head>
-		<body>
-			<SearchTitle />
-		</body>
-
-	</html>
+	<SearchTitle />
 );
 
 // If you want to start measuring performance in your app, pass a function

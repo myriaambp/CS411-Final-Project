@@ -31,11 +31,11 @@ function SearchTitle() {
                 (json) => {
                     // resultHTML.value = result
 		    console.log(json);
-		    const result = json.results;
-                    console.log(result);
+		    //const result = json.results;
+                    //console.log(result);
                     var movie_elements = []
-                    jsonresults = JSON.parse(JSON.stringify(result))
-                    var movie_results = jsonresults.results
+                    //jsonresults = JSON.parse(JSON.stringify(result))
+                    var movie_results = json.results
                     for(var i = 0; i < movie_results.length; i++) {
                         let movie = movie_results[i];
                         console.log(movie)

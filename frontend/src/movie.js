@@ -1,15 +1,30 @@
 import './movie.css';
 import React  from 'react';
 import {Component} from 'react';
-
+import ReactDOM from 'react-dom';
 
 class Movie extends Component {
     // constructor {d, id, i, t} = this.props;
     constructor(props) {
         super(props);
+	this.state = { sentiment : {} };
     }
 
-    
+	componentDidUpdate(prevProps) {
+		if (this.props.id !== prevProps.id) {
+			return;
+		}
+		var description = document.getElementById("description");
+		if (this.state.sentiment.pos_ratio == -1) {
+			ReactDOM.render("Sorry, no review data was found.", description);
+		} else if (0 <= this.state.sentiment.pos_ratio <= 0.5) {
+			ReactDOM.render("Only " + (this.state.sentiment.pos_ratio * 100).toString() + "% of reviewers liked it, and average negative sentiment was " + this.state.sentiment.neg_avg_score.toString(), description);
+		} else if (0.5 < this.state.sentiment.pos_ratio <= 1) {
+			ReactDOM.render("It's looking good! " + (this.state.sentiment.pos_ratio * 100).toString() + "% of reviewers liked it, and average positive sentiment was " + this.state.sentiment.pos_avg_score.toString(), description);
+		} else {
+			ReactDOM.render("Something went wrong.", description);
+		}
+	}
     
     render() {
         let { d, id, i, t } = this.props;
@@ -18,9 +33,8 @@ class Movie extends Component {
             fetch("http://localhost:5000/titleid_reviews/" + id)
             .then(response => response.json())
             .then(json => {
-                const r = json.results;
-            }).then (res => {
-                console.log(res)
+                console.log(json)
+		this.setState({ sentiment : json })
             })
         }
 
@@ -34,7 +48,7 @@ class Movie extends Component {
                 <div className="poster">
                     <img src={i}  className="image" />
                 </div>
-                <div className = "description">
+                <div className = "description" id = "description">
                     <button className = "calcSent" onClick={calcSentiment}> CALCULATE SENTIMENT </button>
                     {/* // + calc_sentiment(movie.id) + */}
                 </div>

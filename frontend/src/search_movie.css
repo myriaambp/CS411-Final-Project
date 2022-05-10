@@ -68,6 +68,28 @@ body {
     justify-content: center;
 
 }
+.movie {
+  font-family: "Gill Sans";
+}
+.title {
+  font-size: 24px;
+  margin: 1px;
+}
+.year {
+  font-size: 16px;
+  margin: 1px;
+}
+
+.image {
+  height: 240px;
+  width: 170px;
+}
+.calcSent {
+  background-color: rgb(118, 255, 118);
+  border: 2px solid green;
+  border-radius: 5px;
+  padding: 2%, 1%;
+}
 
 
 

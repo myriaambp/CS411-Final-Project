@@ -26,7 +26,17 @@ SECRET_KEY = 'django-insecure-pq0k&(r$c3(!0v!gs$zd=&(gx$(-twp4b^#ogk7x(cfm&f6s59
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
+ALLOWED_HOSTS = ['https://localhost:3000', 'https://localhost:8000', 'localhost']
+CSRF_TRUSTED_ORIGINS = ['https://localhost:8000']
+               
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',  # React default port = 3000
+    'http://localhost:8000',  # Django default port = 8000
+)
+
 
 
 # Application definition
@@ -39,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.core',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -49,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'project.urls'

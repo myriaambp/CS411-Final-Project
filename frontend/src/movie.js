@@ -1,6 +1,7 @@
-import './movie.scc';
+// import './movie.scc';
 import React  from 'react';
 import {Component} from 'react';
+
 
 
 class Movie extends Component {
@@ -8,18 +9,14 @@ class Movie extends Component {
     constructor(props) {
         super(props);
     }
-
-    
     
     render() {
         let { d, id, i, t } = this.props;
         // curid
         const calcSentiment = (event) => {
-            fetch("http://localhost:5000/pythonapi/" + {id})
-            .then(response => response.json())
-            .then(json => {
-                const r = json.results;
-            }).then (res => {
+            fetch('http://localhost:8000/pythonapi/' + id, {mode: 'no-cors'})
+            .then(res =>{
+                res.json()
                 console.log(res)
             })
         }
@@ -38,6 +35,7 @@ class Movie extends Component {
                     <button className = "calcSent" onClick={calcSentiment}> CALCULATE SENTIMENT </button>
                     {/* // + calc_sentiment(movie.id) + */}
                 </div>
+                <br />
             </div>
         )
     }

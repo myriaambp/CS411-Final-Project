@@ -13,20 +13,18 @@ function SearchTitle() {
     const [titles, setTitles] = useState([]);
     var jsonresults = ""
 
-    const calcSentiment = (event) => { 
-        console.log("HELLO WORLD")
-    }
-
     const handleSubmit = (event) => {
         var moviename = document.getElementById("movie_input").value;
         var movies_container = document.getElementById("movies_container");
         if(moviename.length < 3) {
             alert("Please Fill In more than 2 characters")
         } else {
+            // fetch("https://imdb-api.com/en/API/SearchMovie/k_wz4q71x5/"+moviename)
             fetch("https://imdb-api.com/en/API/SearchMovie/k_wz4q71x5/"+moviename)
             .then(res => res.json())
             .then(
                 (result) => {
+                    console.log(result)
                     // resultHTML.value = result
                     // console.log(result)
                     var movie_elements = []

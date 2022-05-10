@@ -21,11 +21,6 @@ import GoogleAuth from './Twitter_Auth';
 
 const cors = require("cors");
 
-
-
-
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
@@ -39,14 +34,9 @@ root.render(
           <Route exact path='/'> <SearchTitle /></Route> 
           <Route path='/aboutus'> <AboutUs /></Route>
           <Route path='/auth'>  <GoogleAuth /></Route>
-          {/* <Route path='/goats' component={Goats} /> */}
         </Switch>
       </div>
     </Router>
-        {/* <Route exact path='/' element = {<SearchTitle />}> </Route> */}
-        {/* <Route path='/AboutUs' element = { <AboutUs />}> </Route> */}
-        {/* <Route path='/Auth' element = { <GoogleAuth />}> </Route> */}
-        {/* <Route path='/goats' component={Goats} /> */}
    </div>
 
    
@@ -56,12 +46,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
-
-// # READ ME:
-// #Run the project with 
-// 
-// python3 manage.py runserver
-// cs frontend
-// #npm run build
-// npm start

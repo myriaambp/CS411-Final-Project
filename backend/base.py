@@ -1,10 +1,13 @@
 from flask import Flask
+from flask_cors import CORS
 import requests
 import pandas as pd
 import numpy as np
 import os
 from dotenv import load_dotenv
+from django.views.decorators.csrf import csrf_exempt
 api = Flask(__name__)
+# cors = CORS(app, resources={r"/*": {"origins": "*"}}, headers='Content-Type')
 
 @api.route('/')
 def my_profile():
@@ -19,8 +22,11 @@ def my_profile():
 
 #retrieve opinions by title id
 #each title result should produce a button that corresponds to this tid search
-@api.route("/pythonapi/<tid>")
+
+# @api.route("/pythonapi/<tid>")
+@api.route("/pythonapi/<tid>", methods=["POST"])
 def opinionson(tid):
+    # url = 'https://imdb-api.com/en/API/Reviews/k_wz4q71x5/' + tid;
     url = 'https://imdb-api.com/en/API/Reviews/k_wz4q71x5/' + tid;
     imdb_resp = requests.get(url).json()
     title = imdb_resp["title"]
@@ -41,6 +47,8 @@ def opinionson(tid):
         thismov_rev_ds = reviews[["movie_id" == mid]]
         rate_avg = thismov_rev_ds["rate"].mean()
     return rate_avg
+
+
 
 
         

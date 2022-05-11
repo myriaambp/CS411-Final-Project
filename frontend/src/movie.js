@@ -11,7 +11,7 @@ class Movie extends Component {
     }
 
 	componentDidUpdate(prevProps) {
-		var sentimentStatement = document.getElementById("sentimentStatement");
+		var sentimentStatement = document.getElementById("sentimentStatement" + this.props.id);
 		if (this.props.id !== prevProps.id) {
                     	ReactDOM.render("", sentimentStatement);
 		} else if (this.state.sentiment.pos_ratio == -1) {
@@ -28,6 +28,7 @@ class Movie extends Component {
     render() {
         let { d, id, i, t } = this.props;
         // curid
+	const ssid = "sentimentStatement" + this.props.id;
         const calcSentiment = (event) => {
             fetch("http://localhost:5000/titleid_reviews/" + id)
             .then(response => response.json())
@@ -50,7 +51,7 @@ class Movie extends Component {
                 <div className = "description" id = "description">
                     <button className = "calcSent" onClick={calcSentiment}> CALCULATE SENTIMENT </button>
                     {/* // + calc_sentiment(movie.id) + */}
-		<div className = "sentimentStatement" id = "sentimentStatement"></div>
+		<div className = "sentimentStatement" id={ssid}></div>
                 </div>
             </div>
         )

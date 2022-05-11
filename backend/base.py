@@ -60,6 +60,15 @@ def imdb_titlesearch(query):
 @app.route("/titleid_reviews/<tid>")
 def opinionson(tid):
     imdb_resp = requests.get('https://imdb-api.com/en/API/Reviews/' + imdb_apikey + '/' + tid).json()
+    # imdb searchmovie returns some tv episodes which give an error on this api query
+    if imdb_resp['errorMessage'] != "":
+        vals = {
+                'pos_ratio' : -1,
+                'pos_avg_score' : -1,
+                'neg_avg_score' : -1
+                }
+        return vals
+
     movie_title = imdb_resp['title'] #for twitter searching; implement later
     movie_fulltitle = imdb_resp['fullTitle'] #with year
     imdb_reviews = [rev['title'] + rev['content'] for rev in imdb_resp['items']]
